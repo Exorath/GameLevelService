@@ -5,8 +5,8 @@ package com.exorath.service.gamelevel.res;
  */
 public class SimpleLevelFunction implements LevelFunction {
     private float base = 1.05f;
-    private int baseMultiplier = 50;
-    private int linearMultiplier = 20;
+    private int baseMultiplier = 500;
+    private int linearMultiplier = 200;
 
     @Override
     public int getRequiredXp(LevelPlayer levelPlayer) {
