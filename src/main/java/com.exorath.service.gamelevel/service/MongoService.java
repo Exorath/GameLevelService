@@ -69,8 +69,13 @@ public class MongoService implements Service {
     }
 
     private boolean levelUp(String playerUuid, String gameId, int newLevel, int deductExperience) {
+        Document query = getPlayerQuery(playerUuid, gameId);
+        if(newLevel == 1)
+            query.append("lvl", new Document("$exists", false));
+        else
+            query.append("lvl", newLevel - 1);
         UpdateResult updateResult = playersCollection.updateOne(
-                getPlayerQuery(playerUuid, gameId).append("lvl", newLevel - 1),
+                query,
                 new Document("$set", new Document("lvl", newLevel)).append("$inc", new Document("xp", -deductExperience)).append("$push", new Document("consumable", newLevel))
         );
         return updateResult.getModifiedCount() > 0;
