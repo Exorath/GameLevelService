@@ -71,7 +71,7 @@ public class MongoService implements Service {
     private boolean levelUp(String playerUuid, String gameId, int newLevel, int deductExperience) {
         UpdateResult updateResult = playersCollection.updateOne(
                 getPlayerQuery(playerUuid, gameId).append("lvl", newLevel - 1),
-                new Document("$set", new Document("lvl", newLevel)).append("$inc", new Document("xp", -deductExperience)).append("push", new Document("consumable", newLevel))
+                new Document("$set", new Document("lvl", newLevel)).append("$inc", new Document("xp", -deductExperience)).append("$push", new Document("consumable", newLevel))
         );
         return updateResult.getModifiedCount() > 0;
     }
