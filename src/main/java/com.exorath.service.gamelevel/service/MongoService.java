@@ -40,7 +40,7 @@ public class MongoService implements Service {
         try {
             Document returnedDocument = playersCollection.findOneAndUpdate(
                     getPlayerQuery(playerUuid, gameId),
-                    new Document("$inc", new Document("xp", xp)).append("$inc", new Document("xp", xp)),
+                    new Document("$inc", new Document("xp", xp)).append("$inc", new Document("totalXp", xp)),
                     new FindOneAndUpdateOptions().upsert(true).returnDocument(ReturnDocument.AFTER));
             LevelPlayer updatedPlayer = fromDoc(returnedDocument);
             return new AddExperienceSuccess(handleLevelUp(updatedPlayer));
