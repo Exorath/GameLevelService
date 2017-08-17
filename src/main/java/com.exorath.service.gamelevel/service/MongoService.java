@@ -102,7 +102,7 @@ public class MongoService implements Service {
     @Override
     public Success consumeLevel(String gameId, String playerUuid, int level) {
         UpdateResult updateResult = playersCollection.updateOne(
-                getPlayerQuery(playerUuid, gameId).append("consumable", new Document("$in", level)),
+                getPlayerQuery(playerUuid, gameId).append("consumable", new Document("$in", new int[]{level})),
                 new Document("$pull", new Document("consumable", level))
         );
         return new Success(updateResult.getModifiedCount() > 0);
