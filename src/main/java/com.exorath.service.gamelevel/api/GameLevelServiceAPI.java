@@ -20,7 +20,7 @@ public class GameLevelServiceAPI implements Service {
     @Override
     public AddExperienceSuccess addExperience(String gameId, String playerUuid, int exp) {
         try {
-            String body = Unirest.post("/games/{gameId}/players/{playerUuid}/xp/{xp}")
+            String body = Unirest.post(url("/games/{gameId}/players/{playerUuid}/xp/{xp}"))
                     .routeParam("gameId", gameId)
                     .routeParam("playerUuid", playerUuid)
                     .routeParam("xp", String.valueOf(exp))
@@ -39,7 +39,7 @@ public class GameLevelServiceAPI implements Service {
     public LevelPlayer getPlayer(String gameId, String playerUuid) throws RuntimeException {
         try {
 
-            String body = Unirest.get("/games/{gameId}/players/{playerUuid}")
+            String body = Unirest.get(url("/games/{gameId}/players/{playerUuid}"))
                     .routeParam("gameId", gameId)
                     .routeParam("playerUuid", playerUuid)
                     .asString().getBody();
@@ -53,7 +53,7 @@ public class GameLevelServiceAPI implements Service {
     @Override
     public Success consumeLevel(String gameId, String playerUuid, int level) {
         try {
-            String body = Unirest.post("/games/{gameId}/players/{playerUuid}/consume/{lvl}")
+            String body = Unirest.post(url("/games/{gameId}/players/{playerUuid}/consume/{lvl}"))
                     .routeParam("gameId", gameId)
                     .routeParam("playerUuid", playerUuid)
                     .routeParam("lvl", String.valueOf(level))
