@@ -1,7 +1,7 @@
 # GameLevelService
 The game level service tracks game specific player levels
 
-The level formula is 500*1.05^level + 200*level
+The level formula is `500*1.05^level + 200*level`
 ## Environment
 | Name | Value |
 | --------- | --- |
