@@ -13,6 +13,7 @@ import com.mongodb.client.model.ReturnDocument;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -102,7 +103,7 @@ public class MongoService implements Service {
     @Override
     public Success consumeLevel(String gameId, String playerUuid, int level) {
         UpdateResult updateResult = playersCollection.updateOne(
-                getPlayerQuery(playerUuid, gameId).append("consumable", new Document("$in", new int[]{level})),
+                getPlayerQuery(playerUuid, gameId).append("consumable", new Document("$in", Arrays.asList(new Integer[]{level}))),
                 new Document("$pull", new Document("consumable", level))
         );
         return new Success(updateResult.getModifiedCount() > 0);
