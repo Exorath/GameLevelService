@@ -14,4 +14,8 @@ public class AddExperienceSuccess extends Success {
     public AddExperienceSuccess(String error, Integer code) {
         super(error, code);
     }
+
+    public boolean isLevelUp() {
+        return levelUp;
+    }
 }

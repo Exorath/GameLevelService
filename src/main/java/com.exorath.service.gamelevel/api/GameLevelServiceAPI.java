@@ -5,6 +5,8 @@ import com.exorath.service.gamelevel.res.*;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.Unirest;
 
+import java.util.HashMap;
+
 /**
  * Created by toonsev on 8/17/2017.
  */
@@ -74,4 +76,14 @@ public class GameLevelServiceAPI implements Service {
         return address + endpoint;
     }
 
+    private static HashMap<String, GameLevelServiceAPI> instances = new HashMap<>();
+
+    public static synchronized GameLevelServiceAPI getInstance(String address) {//allows for caching in the future
+        GameLevelServiceAPI gameLevelServiceAPI = instances.get(address);
+        if (gameLevelServiceAPI == null) {
+            gameLevelServiceAPI = new GameLevelServiceAPI(address);
+            instances.put(address, gameLevelServiceAPI);
+        }
+        return gameLevelServiceAPI;
+    }
 }
